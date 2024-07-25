@@ -39,6 +39,7 @@
       const form = renderForm({
         exercise: Object.entries(EXERCISES)[actualExercice][1],
       });
+
       mainSection.appendChild(form);
     }
   };
@@ -106,26 +107,14 @@
     return form;
   };
 
-  const basicOperationsNumbers = ({ firstNumber, secondNumber }) => {
-    firstNumber = parseInt(firstNumber);
-    secondNumber = parseInt(secondNumber);
-
-    const multiply = firstNumber * secondNumber;
-    const minus = firstNumber - secondNumber;
-    const plus = firstNumber + secondNumber;
-    const dividedBy = firstNumber / secondNumber;
-
-    return {
-      multiply,
-      minus,
-      plus,
-      dividedBy,
-    };
+  const showNumbersBiggerToSmaller = ({ numbers }) => {
+    const orderedNumbers = numbers.sort((a, b) => b - a);
+    return orderedNumbers;
   };
 
   const EXERCISES = {
-    ENTER_NUMBERS: {
-      TITLE: "Número ingresado",
+    ENTER_NUMBERS_AND_EQUALS_THEM: {
+      TITLE: "Números Iguales",
       FORMS: {
         LABELS: {
           NUMBER_ONE: {
@@ -159,10 +148,11 @@
                 secondNumber,
               ]);
               if (!convertedsNumbers) return;
-              else
-                alert(
-                  `Los números que ingresó fueron estos: ${firstNumber} y ${secondNumber}`
-                );
+              else {
+                if (convertedsNumbers[0] == convertedsNumbers[1])
+                  alert(`Los números que ingresó son iguales`);
+                else alert(`Los números que ingresó son distintos`);
+              }
             },
           },
           CANCEL: {
@@ -183,51 +173,49 @@
         },
       },
     },
-    ENTER_NAME: {
-      TITLE: "Nombre ingresado",
+    ENTER_A_NUMER_AND_VALIDATE_IF_POSITIVE_OR_NEGATIVE: {
+      TITLE: "Número positivo o negativo",
       FORMS: {
         LABELS: {
           NAME: {
-            TEXT: "Ingrese su nombre.",
+            TEXT: "Ingrese el número",
             INPUTS: {
-              TYPE: TYPE_INPUTS.TEXT,
-              PLACEHOLDER: "Jorge...",
-              NAME: "name",
+              TYPE: TYPE_INPUTS.NUMBER,
+              PLACEHOLDER: "3,2,51,0...",
+              NAME: "number",
             },
           },
         },
         BUTTONS: {
           SUBMIT: {
             TYPE: TYPE_BUTTONS.PRIMARY,
-            TEXT: "Ingresar el nombre.",
+            TEXT: "Validar el Número",
             FUNCTION: (e) => {
               e.preventDefault();
               const formData = new FormData(e.target.form);
-              const name = formData.get("name");
-
-              if (!name) alert("Debe ingresar un nombre.");
+              const number = formData.get("number");
+              const convertedsNumbers = validateNumbersData([number]);
+              if (!convertedsNumbers) return;
               else {
-                console.log(`Hola, buenas noches ${name}`);
-                alert(
-                  `Hola, buenas noches ${name}, por favor revisar la consola.`
-                );
+                if (number >= 0) alert("El número que ingresó es positivo");
+                else alert("El número que ingresó es negativo");
               }
             },
           },
           CANCEL: {
             TYPE: TYPE_BUTTONS.SECONDARY,
-            TEXT: "Borrar nombre.",
+            TEXT: "Borrar número",
             FUNCTION: (e) => {
               e.preventDefault();
-              const nameInput = document.querySelector('input[name="name"]');
+              const nameInput = document.querySelector('input[name="number"]');
               nameInput.value = "";
             },
           },
         },
       },
     },
-    ENTER_NUMBERS_AND_MATH: {
-      TITLE: "Calculadora básica",
+    ENTER_NUMBERS_AND_ORDER_IT_TO_BIGER_TO_SMALLER_2: {
+      TITLE: "Números en orden",
       FORMS: {
         LABELS: {
           NUMBER_ONE: {
@@ -262,14 +250,10 @@
               ]);
               if (!convertedsNumbers) return;
               else {
-                const { dividedBy, minus, multiply, plus } =
-                  basicOperationsNumbers({ firstNumber, secondNumber });
-                console.log(
-                  `Las operaciones de ${firstNumber} y ${secondNumber} son: \n Suma: ${plus} \n Resta: ${minus} \n Multiplicación: ${multiply} \n División: ${dividedBy}`
-                );
-                alert(
-                  "Por favor, mirar la consola para ver el resultado de sus operaciones."
-                );
+                const orderedNumbers = showNumbersBiggerToSmaller({
+                  numbers: convertedsNumbers,
+                });
+                alert(`Sus números en orden: \n ${orderedNumbers}`);
               }
             },
           },
@@ -291,46 +275,76 @@
         },
       },
     },
-    DEGREES_FAHRENHEIT_TO_CELSIUS: {
-      TITLE: "Convertor de temperaturas básica",
+    ENTER_NUMBERS_AND_ORDER_IT_TO_BIGER_TO_SMALLER_3: {
+      TITLE: "Números en orden avanzado",
       FORMS: {
         LABELS: {
           NUMBER_ONE: {
-            TEXT: "Ingrese cantidad de grados Celcius.",
+            TEXT: "Ingrese el primer número.",
             INPUTS: {
               TYPE: TYPE_INPUTS.NUMBER,
               PLACEHOLDER: "3,2,51,0...",
-              NAME: "degrees",
+              NAME: "number1",
+            },
+          },
+          NUMBER_TWO: {
+            TEXT: "Ingrese el segundo número.",
+            INPUTS: {
+              TYPE: TYPE_INPUTS.NUMBER,
+              PLACEHOLDER: "3,2,51,0...",
+              NAME: "number2",
+            },
+          },
+          NUMBER_THREE: {
+            TEXT: "Ingrese el tercer número.",
+            INPUTS: {
+              TYPE: TYPE_INPUTS.NUMBER,
+              PLACEHOLDER: "3,2,51,0...",
+              NAME: "number3",
             },
           },
         },
         BUTTONS: {
           SUBMIT: {
             TYPE: TYPE_BUTTONS.PRIMARY,
-            TEXT: "Hacer conversión",
+            TEXT: "Ingresar el número.",
             FUNCTION: (e) => {
               e.preventDefault();
               const formData = new FormData(e.target.form);
-              const degrees = formData.get("degrees");
-              const convertedsNumbers = validateNumbersData([degrees]);
+              const firstNumber = formData.get("number1");
+              const secondNumber = formData.get("number2");
+              const thirdNumber = formData.get("number3");
+              const convertedsNumbers = validateNumbersData([
+                firstNumber,
+                secondNumber,
+                thirdNumber,
+              ]);
               if (!convertedsNumbers) return;
               else {
-                const degreesCelciusToFarenheit = (degrees * 9) / 5 + 32;
-                alert(
-                  `${degrees} grados Celcius convertidos a Farenheit serían: ${degreesCelciusToFarenheit}`
-                );
+                const orderedNumbers = showNumbersBiggerToSmaller({
+                  numbers: convertedsNumbers,
+                });
+                alert(`Sus números en orden: \n ${orderedNumbers}`);
               }
             },
           },
           CANCEL: {
             TYPE: TYPE_BUTTONS.SECONDARY,
-            TEXT: "Borrar número.",
+            TEXT: "Borrar números.",
             FUNCTION: (e) => {
               e.preventDefault();
-              const numberInput = document.querySelector(
-                'input[name="degrees"]'
+              const number1Input = document.querySelector(
+                'input[name="number1"]'
               );
-              numberInput.value = "";
+              const number2Input = document.querySelector(
+                'input[name="number2"]'
+              );
+              const number3Input = document.querySelector(
+                'input[name="number3"]'
+              );
+              number1Input.value = "";
+              number2Input.value = "";
+              number3Input.value = "";
             },
           },
         },
