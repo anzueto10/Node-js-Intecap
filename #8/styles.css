@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+    font-family: "Inter", sans-serif;
+    font-size: 1rem;
+
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: 1.75rem;
+
+}
+
+
+#root {
+    max-width: 100vw;
+    min-height: 100vh;
+    background-color: #1A1A2E;
+    color: #fff;
+    padding: 4rem
+}
+
+#main-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 5rem
+}
+
+table {
+    border-radius: 20px;
+
+}
+
+table,
+td {
+    border: 1px solid #fff;
+    border-collapse: collapse;
+    text-align: center;
+    width: 50px;
+    height: 50px;
+    padding: 1rem;
+}
+
+.hashtag {
+    font-weight: bold;
+    color: red;
+}
+
+.btn-primary {
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    padding: .5rem;
+    border: .2rem solid #00BFAE;
+}
+
+.btn-primary {
+    background-color: #00BFAE;
+    color: #000
+}
+
+input {
+    background-color: transparent;
+    border: solid 2px #fff;
+    border-radius: 10px;
+    outline: none;
+    padding: .5rem;
+    color: #fff;
+}
+
+#numberInputs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
