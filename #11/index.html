@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manejo de cuentas</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Manejo de Cuenta Bancaria</h1>
+        
+        <div class="account-info">
+            <p><strong>Saldo actual: </strong> <span id="account-ammount"></span></p>
+            <p><strong>Fecha de creación: </strong> <span id="account-created-at-date"></span></p>
+        </div>
+
+        <input type="number" id="ammount" placeholder="Ingrese la cantidad" min="25">
+        
+        <div class="btn-group">
+            <button class="btn deposit" id="deposit-button">Depositar</button>
+            <button class="btn withdraw" id="withdraw-button">Retirar</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</body>
+</html>
